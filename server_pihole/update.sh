@@ -5,7 +5,6 @@ update_system() {
     echo "Iniciando la actualización del sistema operativo..."
     sudo dnf upgrade -y
     echo "Actualización del sistema operativo completada."
-    exit 0
 }
 
 # Función para actualizar Pi-hole
@@ -13,7 +12,6 @@ update_pihole() {
     echo "Iniciando la actualización de Pi-hole..."
     sudo PIHOLE_SKIP_OS_CHECK=true pihole -up
     echo "Actualización de Pi-hole completada."
-    exit 0
 }
 
 # Menú interactivo
@@ -32,14 +30,20 @@ do
     read option
 
     case $option in
-        1) update_system;;
-        2) update_pihole;;
+        1) update_system
+           exit 0
+           ;;
+        2) update_pihole
+           exit 0
+           ;;
         3) 
            update_system
            update_pihole
+           exit 0
            ;;
         4) echo "Saliendo..."
-           exit 0;;
+           exit 0
+           ;;
         *) echo "Opción no válida. Por favor, elige una opción del menú.";;
     esac
 done
